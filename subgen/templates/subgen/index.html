@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de sous-titres vidéo</title>
+    <script src="{% static  'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        iframe {
+            max-width: 100%;
+        }
+
+        body {
+            background-image: url({% static 'backs.jpeg' %}), linear-gradient(#191c20, #24292e 15%);
+            background-size: 100%;
+        }
+
+        .container {
+            background-color: aliceblue;
+            max-height: 80vh; /* Hauteur maximale de la div centrale */
+            overflow-y: auto; /* Activation du défilement vertical si le contenu dépasse la hauteur */
+            border-radius: 10px; /* Pour arrondir les coins */
+        }
+
+        .body {
+            max-width: 70%;
+            width: auto;
+            margin: 10vh auto;
+        }
+
+        .container {
+            align-items: center;
+            background-color: aliceblue;
+        }
+
+        .images:hover {
+            transform: scale(1.05);
+        }
+
+        .images {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+    .cont
+    {
+        margin-left: 20%;
+    }
+
+    .container
+    {
+        background-color: rgba(32, 32, 32, 0.38);
+        color: white;
+
+    }
+
+    </style>
+
+
+</head>
+
+<body>
+<div class="body">
+
+    <div class="my-2">
+        <header class="bg-transparent text-center py-1 mb-5 top-fixed">
+            <strong class="text-light display-5">GBémiton Agri Yoruba</strong>
+        </header>
+        {% for vid in vids %}
+            <a href="{% url 'vid'  vid.pk %}" class="text-decoration-none">
+                <div class=" images container rounded py-1 my-3 d-flex flex-column justify-content-center">
+                    <div class="container-md">
+                        <div class=" d-flex justify-content flex-row align-items-center py-4">
+                            <div class="col-5">
+                                {% if vid.image %}
+                                    <img class="images " height="180" src="media/{{ vid.image }}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="col-5 text-center">
+                                {% if vid.name %}
+                                    <b class="fs-4">{{ vid.name }}</b>
+                                    <div class="d-flex justify-content-center align-items-center my-4">
+                                        <p class="col-8 fs-5">{% if  vid.description %}
+                                        	{{ vid.description }}
+                                        {% endif %} </p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+{#    <script src="{% static 'js/import.js' %}" ></script>#}
+</body>
+
+</html>
