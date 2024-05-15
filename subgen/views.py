@@ -48,3 +48,11 @@ def generate(request):
 
     return HttpResponse("Evenement non trouvé !!! ")
 # Create your views here.
+
+
+def upload(request):
+
+    if request.method == 'POST':
+        video = vid.objects.create(name="Bawo ni lati ṣagbe 2ha pẹlu 2L ti eya?", cap_fil="subtitles/Yotuba_Comment_labourer_2ha_avec_2L_dessences.vtt", image="images/Screenshot_from_2024-05-15_14-43-49.png", description="lilo ẹrọ ogbin fun itulẹ ati ogbin oke, ṣe alaye awọn ipele ti igbaradi, ibẹrẹ ati iṣẹ ẹrọ naa. Olukọni n ṣe afihan bi o ṣe le lo ẹrọ naa lati mu ilọsiwaju ṣiṣẹ ati didara iṣẹ-ogbin", url="videos/Comment_labourer_2ha_avec_2L_dessences__001.mp4")
+        return redirect('subgen:home')
+    return render(request, "subgen/upload.html")
